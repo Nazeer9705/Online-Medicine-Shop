@@ -1,0 +1,27 @@
+{
+  "name": "pharmacy-drug-management-system",
+  "version": "1.0.0",
+  "description": "Comprehensive Pharmacy & Drug Management System with Customer & Seller Portals, Inventory Management, and Order Tracking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "pharmacy",
+    "drug-management",
+    "inventory-system",
+    "express",
+    "javascript",
+    "jsp"
+  ],
+  "author": "Pharmacy Management System Team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "better-sqlite3": "^11.8.1"
+  }
+}
