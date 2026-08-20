@@ -1,222 +1,112 @@
-# 💊 Pharmacy & Drug Management System
+# 💊 MEDICARE V2.0 — Online Pharmacy & Healthcare E-Commerce Platform
 
-[![Node.js](https://img.shields.io/badge/Node.js-v22.x-brightgreen.svg)](https://nodejs.org/)
-[![Express](https://img.shields.io/badge/Express-v4.21-blue.svg)](https://expressjs.com/)
-[![SQLite](https://img.shields.io/badge/SQLite-v3.x-orange.svg)](https://www.sqlite.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](#license)
-[![Status](https://img.shields.io/badge/Status-Active-success.svg)](#)
+[![React](https://img.shields.io/badge/React-v18.3-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-v5.4-blue.svg)](https://www.typescriptlang.org/)
+[![Express](https://img.shields.io/badge/Express-v4.19-brightgreen.svg)](https://expressjs.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-v5.15-indigo.svg)](https://www.prisma.io/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v3.4-teal.svg)](https://tailwindcss.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 
-A full-featured **Pharmacy & Drug Management Web Application** designed for seamless pharmaceutical inventory control, customer drug purchasing, and vendor sales tracking.
-
-The system features dual role-based access for **Customers** and **Vendors (Sellers)**, supported by a robust backend database, inventory auto-deduction triggers, and interactive dashboards.
+**MEDICARE V2.0** is a modern, enterprise-grade online pharmacy, prescription management, and pharmaceutical e-commerce platform built with React 18, TypeScript, Tailwind CSS, Express.js, and Prisma ORM.
 
 ---
 
-## 🌟 Key Features
+## 🌟 Key V2.0 Features & Role Portals
 
-### 👤 Customer Portal
-- **User Authentication**: Secure registration and login system.
-- **Product Catalog**: Browse available pharmaceutical products with live stock status, prices, manufacturer details, and expiration dates.
-- **Instant Ordering**: Select medicine quantities and place orders with real-time total price calculation.
-- **Order History**: Track past order details including Order ID, timestamp, quantity, and total cost.
+### 👤 Customer E-Commerce Portal
+- **Medicine Catalog**: Filterable catalog with departments (Pain Relief, Immunity, Diabetes, Heart Care, Cold & Flu, Medical Devices).
+- **Smart Search & Voice Search**: Search by brand, composition, or dosage form; voice search modal for accessibility.
+- **Cart & Discount Coupons**: Multi-item cart with server-validated prices, free delivery threshold (`> ₹499`), and coupon system (`MEDICARE10`, `WELCOME50`).
+- **Multi-Step Checkout**: Address selection, prescription validation, payment options (COD, UPI, Credit Card).
+- **Visual Order Timeline**: Live tracking steps (*Order Placed -> Packed -> Out For Delivery -> Delivered*).
+- **Rx Prescription Upload**: Doctor prescription file upload for pharmacist approval.
 
 ### 🏪 Vendor / Seller Portal
-- **Vendor Dashboard**: Personal seller profile with store location and contact details.
-- **Add New Products**: Introduce new drugs into the global pharmacy registry with batch IDs, manufacturing & expiration dates, and unit pricing.
-- **Stock Management & Restocking**: Monitor live inventory levels for all managed drugs and add stock on the fly.
-- **Sales & Order Tracking**: View customer orders placed for vendor products in real time.
+- **Seller Dashboard**: Live sales analytics, total revenue metrics, low stock alerts.
+- **Product Management**: Register new pharmaceutical drugs with composition, dosage form, MRP, and initial stock.
+- **FEFO Batch Inventory**: First-Expire-First-Out stock batch tracking with one-click restocking.
 
-### ⚡ Modern Backend & Database Architecture
-- **Zero-Config Database**: Powered by SQLite3 (`pharmacy.db`) with auto-seeding for instant demo testing.
-- **Relational Integrity**: Foreign key enforcement across customers, sellers, products, inventory, and orders.
-- **Session Management**: Server-side session tracking with multi-user isolation.
-- **MySQL Compatibility**: Includes legacy `drugdatabase.sql` script with procedures and triggers for MySQL deployment.
+### ⚕️ Pharmacist Verification Portal
+- **Prescription Queue**: Real-time queue for uploaded customer doctor prescriptions.
+- **Verification Workflow**: Review uploaded prescription files, approve or reject with clinical notes.
 
----
+### 🛡️ Admin & Governance Console
+- **Platform Analytics**: Total platform revenue, user growth, seller metrics.
+- **User Governance**: Inspect and manage accounts across all system roles.
 
-## 🛠️ Technology Stack
-
-| Layer | Technology |
-| :--- | :--- |
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Backend Framework** | Node.js, Express.js |
-| **Session Management** | Express-Session |
-| **Database** | SQLite3 (`better-sqlite3`), MySQL (Optional Legacy Support) |
-| **Styling** | Custom Responsive CSS Design |
+### 🤖 MediAssist AI Assistant
+- **Educational Pharmacy Guidance**: Embedded AI helper drawer for non-prescriptive medical guidance, dosage instructions, and store navigation.
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Architecture & Tech Stack
 
 ```
 Pharmacy-Drug-Management-System/
-├── package.json                   # Node.js dependencies & scripts
-├── server.js                      # Express web server & route handlers
-├── pharmacy.db                    # Auto-generated SQLite database
-├── README.md                      # Project documentation
-└── Pharmacy-Drug-Management-System/
-    ├── drugdatabase.sql           # MySQL Database creation script & triggers
-    ├── SQL.txt                    # SQL Queries reference
-    ├── Screenshots/               # System preview screenshots
-    └── Pharmacy-Drug-Mangement/
-        ├── WebContent/            # Web application assets & pages
-        │   ├── css/               # Modular CSS stylesheet bundle
-        │   ├── images/            # UI images (avatars, pills, backgrounds)
-        │   ├── Index.html         # Landing page
-        │   ├── Login.html         # User authentication form
-        │   ├── Register.html      # Customer registration form
-        │   ├── SellerRegister.html# Vendor registration form
-        │   ├── AddProduct.html    # Add product form
-        │   └── *.jsp              # Dynamic web page templates
-        └── build.xml              # Legacy Ant build file for Java/Tomcat
+├── client/                     # React 18 + TypeScript + Vite + Tailwind CSS + Lucide
+│   ├── src/
+│   │   ├── components/         # Navbar, Footer, MobileNav, MediAssist, VoiceSearch, OrderTimeline
+│   │   ├── context/            # AuthContext, CartContext, WishlistContext
+│   │   ├── pages/              # Public, Customer, Seller, Pharmacist, Admin pages
+│   │   ├── services/           # API fetch wrapper
+│   │   └── types/              # TypeScript interfaces
+├── server/                     # Node.js + Express + TypeScript + Prisma ORM
+│   ├── prisma/                 # 20+ normalized database entities
+│   └── src/
+│       ├── controllers/        # Auth, Product, Cart, Order, Rx, Inventory, Seller, Admin
+│       ├── middleware/         # Auth, Role-based RBAC, Error Handling
+│       └── routes/             # REST API v1 endpoints
+├── docker-compose.yml          # Docker orchestration
+└── .github/workflows/ci.yml   # CI/CD Pipeline
 ```
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Quick Start & Local Running
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v16.x or higher)
-- [npm](https://www.npmjs.com/) (installed automatically with Node.js)
+- Node.js (v18.x or higher)
+- npm (v9.x or higher)
 
-### 1. Install Dependencies
-Run the following command in the project root folder:
+### 1. Start Backend REST API Server
 ```bash
+cd server
 npm install
-```
-
-### 2. Start the Web Server
-Launch the Node.js web server:
-```bash
-npm start
-```
-*Or run in development mode:*
-```bash
+npx prisma db push
+npx tsx src/db/seed.ts
 npm run dev
 ```
+*Backend runs on `http://localhost:5000/api/v1`*
 
-### 3. Open in Browser
-Navigate to `http://localhost:3000` in your web browser (Google Chrome, Firefox, Edge, etc.).
-
----
-
-## 🔑 Demo Credentials
-
-The database automatically seeds with default test accounts upon first run:
-
-| Role | User ID | Password | Access Rights |
-| :--- | :--- | :--- | :--- |
-| **Customer** | `cust123` | `pass123` | Browse Drugs, Buy Products, View Order History |
-| **Vendor** | `seller123` | `pass123` | Add Products, Restock Stock, View Sales Orders |
-
----
-
-## 📊 Database Schema (Entity-Relationship)
-
-```mermaid
-erDiagram
-    CUSTOMER {
-        string uid PK
-        string pass
-        string fname
-        string lname
-        string email
-        string address
-        int phno
-    }
-
-    SELLER {
-        string sid PK
-        string sname
-        string pass
-        string address
-        int phno
-    }
-
-    PRODUCT {
-        string pid PK
-        string pname UK
-        string manufacturer
-        date mfg
-        date exp
-        int price
-    }
-
-    INVENTORY {
-        string pid PK, FK
-        string sid PK, FK
-        string pname
-        int quantity
-    }
-
-    ORDERS {
-        int oid PK
-        string pid FK
-        string sid FK
-        string uid FK
-        datetime orderdatetime
-        int quantity
-        int price
-    }
-
-    SELLER ||--o{ INVENTORY : "manages"
-    PRODUCT ||--o{ INVENTORY : "stocked as"
-    CUSTOMER ||--o{ ORDERS : "places"
-    SELLER ||--o{ ORDERS : "receives"
-    PRODUCT ||--o{ ORDERS : "contains"
+### 2. Start Frontend React Client
+```bash
+cd client
+npm install
+npm run dev
 ```
+*Frontend runs on `http://localhost:5173`*
 
 ---
 
-## 🌐 Application Navigation & Routes
+## 🔑 Demo Test Credentials
 
-| Route | Method | Description |
-| :--- | :---: | :--- |
-| `/` | `GET` | Main Landing Page (Login / Customer Register / Vendor Register) |
-| `/Login.html` | `GET` | Role-based User Login Form |
-| `/Login.jsp` | `POST` | Authenticates Customer/Seller credentials |
-| `/Register.html` | `GET` | Customer Account Registration Form |
-| `/Register.jsp` | `POST` | Registers a new Customer in database |
-| `/SellerRegister.html` | `GET` | Vendor Registration Form |
-| `/SellerRegister.jsp` | `POST` | Registers a new Vendor in database |
-| `/Homepage.jsp` | `GET` | Customer Dashboard showing user profile card |
-| `/SellerHomepage.jsp` | `GET` | Vendor Dashboard showing store profile card |
-| `/Buy.jsp` | `GET` | Customer Marketplace listing available medicines |
-| `/PlaceOrder.jsp` | `POST` | Processes purchase and updates inventory levels |
-| `/Orders.jsp` | `GET` | Customer Purchase History Table |
-| `/AddProduct.html` | `GET` | Vendor Form to add a new drug to catalog |
-| `/AddProduct.jsp` | `POST` | Inserts new product & creates initial inventory |
-| `/AddInventory.jsp` | `GET` | Vendor Restock Management Dashboard |
-| `/UpdateInventory.jsp` | `POST` | Increments stock quantity for a vendor product |
-| `/SellerOrders.jsp` | `GET` | Vendor Sales Orders Table |
-| `/Logout.jsp` | `GET` | Terminates user session and redirects to landing page |
+| Role | Email | Password | Responsibilities |
+| :--- | :--- | :--- | :--- |
+| **Customer** | `john.doe@medicare.com` | `pass123` | Buy medicines, Cart, Checkout, Order Tracking |
+| **Seller** | `apex.pharma@medicare.com` | `pass123` | Manage products, FEFO inventory, Restock |
+| **Pharmacist** | `pharmacist@medicare.com` | `pass123` | Verify Rx uploads, Approve/Reject prescriptions |
+| **Admin** | `admin@medicare.com` | `admin123` | Platform analytics, User governance |
 
 ---
 
-## 🗄️ MySQL Database Setup (Optional)
+## 🐳 Docker Deployment
 
-If you prefer using **MySQL Server** instead of SQLite:
-1. Open your MySQL client (e.g. Workbench or CLI).
-2. Execute the provided SQL script:
-   ```bash
-   mysql -u root -p < Pharmacy-Drug-Management-System/drugdatabase.sql
-   ```
-3. Update connection parameters in your database configuration file if required.
-
----
-
-## 📸 Interface Screenshots
-
-| Landing Page | Product Marketplace |
-| :---: | :---: |
-| ![Landing Page](./Pharmacy-Drug-Management-System/Screenshots/Index.png) | ![Buy Page](./Pharmacy-Drug-Management-System/Screenshots/Buy%201.png) |
-
-| Vendor Restock | Customer Orders |
-| :---: | :---: |
-| ![Restock](./Pharmacy-Drug-Management-System/Screenshots/Restock.png) | ![Orders](./Pharmacy-Drug-Management-System/Screenshots/CustomerHomepage.png) |
+Run the full stack (PostgreSQL + Express + Nginx React Frontend) with a single command:
+```bash
+docker-compose up --build -d
+```
 
 ---
 
 ## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).

@@ -1,0 +1,33 @@
+name: MEDICARE V2.0 CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm ci
+          npm run build
+
+      - name: Install Server Dependencies
+        run: |
+          cd server
+          npm ci
+          npx prisma generate
+          npm run build
